@@ -1,13 +1,13 @@
 FROM node:12.18.3-buster-slim
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-
-COPY .docker/package.json /app/package.json
+ENV PUPPETEER_VERSION=5.2.1
 
 WORKDIR /app
 
-RUN npm install
+RUN npm install \
+    puppeteer@${PUPPETEER_VERSION}
 
-COPY .docker/index.js /app/index.js
+COPY .docker /app
 
 CMD ["node", "index.js"]
